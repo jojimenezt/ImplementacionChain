@@ -32,4 +32,38 @@ public class ArrayQueue<T> implements Queue<T> {
         if(isEmpty()) return null;
         else return queue[(front + 1)% queue.length];
     }
+    
+    public T getRearElement(){
+        if (isEmpty()) return null;
+        else return queue[rear];
+    }
+    
+    public void put(T theElement){
+        if((rear+1)%queue.length==front){
+            T[] newQueue=(T[]) new Object[2*queue.length];
+            int start=(front+1)%queue.length;
+            if(start<2) System.arraycopy(queue, start, newQueue, 0, queue.length-1);
+            else{
+                System.arraycopy(queue, start, newQueue, 0, queue.length-start);
+                System.arraycopy(queue, 0, newQueue, queue.length-start, rear+1);
+            }
+            front=newQueue.length-1;
+            rear=queue.length-2;
+            queue=newQueue;
+        }
+        rear=(rear+1)%queue.length;
+        queue[rear]=theElement;
+    }
+    
+    public T remove(){
+        if (isEmpty()) return null;
+        front=(front+1)%queue.length;
+        T frontElement=queue[front];
+        queue[front]=null;
+        return frontElement;
+    }   
+    
+    public static void main(String[] args) {
+        
+    }
 }
