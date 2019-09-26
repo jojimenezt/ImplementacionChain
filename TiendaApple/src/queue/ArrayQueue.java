@@ -14,9 +14,10 @@ public class ArrayQueue<T> implements Queue<T> {
     int rear;
     T[] queue;
     
-    public ArrayQueue(int inicialCapacity){
-        if(inicialCapacity<1)
+    public ArrayQueue(int initialCapacity){
+        if(initialCapacity<1)
             throw new IllegalArgumentException("inicialCampacity must be > 1");
+        queue = (T[]) new Object[initialCapacity +1 ];
         front = rear= 0;
     }
     
@@ -61,9 +62,6 @@ public class ArrayQueue<T> implements Queue<T> {
         T frontElement=queue[front];
         queue[front]=null;
         return frontElement;
-    }   
-    
-    public static void main(String[] args) {
-        
     }
+    
 }

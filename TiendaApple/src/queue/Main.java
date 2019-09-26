@@ -13,21 +13,35 @@ import java.util.*;
  */
 public class Main {
     
+    
+    
     public static void main(String[] args) {
+        
+        Queue productos = new ArrayQueue<String>();
+        
+        
         Scanner x= new Scanner(System.in);
         int numProductos = x.nextInt();
-        String[] productos= new String[numProductos];
         for(int i=0;i<numProductos;i++){
-            productos[i]=x.next();
+            productos.put(x.next());
         }
-        
+        int nn = 0;
         int numTiendas= x.nextInt();
-        int[] tiendas= new int[numTiendas];
-        for(int j=0;j<numTiendas;j++){
-            tiendas[j]=x.nextInt();
+        ArrayQueue tiendas = new ArrayQueue<ArrayStack>();
+        for(int i=0;i<numTiendas;i++){
+            nn = x.nextInt();
+            ArrayStack arr = new ArrayStack(nn);
+            for(int j=0; j<nn; j++) arr.push(productos.remove());
+            tiendas.put(arr);
         }
         
-  
+        for(int i=0;i<numTiendas;i++){
+            ArrayStack ti = (ArrayStack) tiendas.remove();
+            ti = ti.invert();
+            System.out.print("[");
+            while(! ti.isEmpty()) System.out.print(ti.pop()+" ");
+            System.out.println("]");
+        }
         
     }
     

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package stack2;
+package queue;
 import java.util.*;
 
         
@@ -11,6 +11,7 @@ import java.util.*;
 public class ArrayStack<T> implements Stack<T>{
     int top;
     T[] stack;
+    
 
     public ArrayStack(int iniCapacity) {
         if(iniCapacity < 1) throw new IllegalArgumentException ("Initial Capacity must be >=1");
@@ -54,6 +55,17 @@ public class ArrayStack<T> implements Stack<T>{
         stack[top] = null;
         top--;
         return topElement;
+    }
+    
+    
+    public ArrayStack<T> invert(){
+        ArrayStack arr2 = new ArrayStack<T>();
+        
+        while(!this.isEmpty()){
+            arr2.push(this.pop());
+        }
+        
+        return arr2;
     }
     
 }
